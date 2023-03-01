@@ -15,8 +15,14 @@ public class PlayerControls : MonoBehaviour
     public float castDist = 0.2f;
     public float gravityScale = 5f;
     public float gravityFall = 40f;
-    // variables for 1 jump at a time 
-    //bool grounded = false;
+    //public Restart restart;
+
+    //  variables for the lose screen UI
+    public GameObject YouLose_Text;
+    public GameObject Restart_Button;
+    public GameObject Background;
+    public GameObject Player_follow;
+    public GameObject YouLose_UI;
 
     // Start is called before the first frame update
     void Start()
@@ -71,7 +77,7 @@ public class PlayerControls : MonoBehaviour
         Debug.DrawRay(transform.position, Vector2.down * castDist, Color.red);
 
         // if the collider hits something 
-        if (hit.collider != null && hit.transform.name == "Ground")
+        if (hit.collider != null && hit.transform.tag == "Ground")
         {
             grounded = true;
         }
@@ -90,7 +96,12 @@ public class PlayerControls : MonoBehaviour
         // if the game object is a spike, destroy the player 
         if (other.gameObject.name == "Spike")
         {
+            //YouLose_Text.SetActive(true);
+            //Restart_Button.SetActive(true);
+            //Background.SetActive(true);
+            YouLose_UI.SetActive(true);
             Destroy(gameObject);
+            Destroy(Player_follow);
         }
     }
 }
